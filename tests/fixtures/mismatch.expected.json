@@ -1,0 +1,1 @@
+{"schema_version":1,"ok":false,"summary":{"declarations":3,"diagnostics":1},"diagnostics":[{"code":"SC2001","severity":"error","message":"Type 'number' is not assignable to type 'boolean'.","span":{"start":{"line":2,"column":24},"end":{"line":2,"column":25}}}]}

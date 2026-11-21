@@ -1,0 +1,14 @@
+__pycache__/
+*.py[cod]
+.venv/
+data/
+*.sqlite*
+*.db
+*.db-shm
+*.db-wal
+.env
+.env.*
+.prep/
+test-results/
+playwright-report/
+target/

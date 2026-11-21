@@ -1,0 +1,19 @@
+{
+  "fixtures": [
+    {
+      "id": "valid",
+      "label": "Valid declarations",
+      "source": "let count: number = 42;\nconst name: string = \"Ada\";\nconst done: boolean = false;\n"
+    },
+    {
+      "id": "mismatch",
+      "label": "Type mismatch",
+      "source": "const attempts: number = 3;\nconst ready: boolean = 2;\nconst title: string = \"Map\";\n"
+    },
+    {
+      "id": "unsupported",
+      "label": "Unsupported syntax",
+      "source": "const items: string[] = [\"a\"];\nlet n: number = 1e3;\n// note\nlet ok: boolean = true;\n"
+    }
+  ]
+}

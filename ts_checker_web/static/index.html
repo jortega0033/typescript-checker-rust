@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Subset Checker</title>
+<link rel="stylesheet" href="/static/app.css">
+</head>
+<body>
+<header class="top">
+  <h1>Subset Checker</h1>
+  <p class="lead">Checks <code>let</code> and <code>const</code> declarations of string, number and boolean literals. Nothing is executed.</p>
+</header>
+<main class="layout">
+  <section class="pane" aria-labelledby="editor-h">
+    <h2 id="editor-h">Source</h2>
+    <div class="row">
+      <label for="fixture-select">Example</label>
+      <select id="fixture-select" disabled>
+        <option value="">Loading examples…</option>
+      </select>
+      <button type="button" id="load-fixture" disabled>Load example</button>
+      <button type="button" id="undo-load" hidden>Undo load</button>
+    </div>
+    <label for="source" class="block">Code to check</label>
+    <textarea id="source" spellcheck="false" autocomplete="off" autocapitalize="off" rows="14" aria-describedby="source-hint"></textarea>
+    <p id="source-hint" class="hint">Press Ctrl+Enter (Cmd+Enter on Mac) to check. <span id="source-line-count">1 line</span></p>
+    <button type="button" id="check-btn" class="primary">Check source</button>
+  </section>
+  <section class="pane" aria-labelledby="results-h">
+    <h2 id="results-h">Results</h2>
+    <p id="status" role="status" aria-live="polite" aria-atomic="true">Ready.</p>
+    <p id="diagnostics-empty" class="empty">Run a check to see results here.</p>
+    <ol id="diagnostics" hidden></ol>
+  </section>
+</main>
+<script src="/static/app.js"></script>
+</body>
+</html>

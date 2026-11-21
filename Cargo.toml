@@ -1,0 +1,19 @@
+[package]
+name = "ts_subset_check"
+version = "0.1.0"
+edition = "2021"
+description = "Checker for a tiny, fixed subset of TypeScript declarations. Tokenizes and parses only; never executes input."
+publish = false
+
+[lib]
+name = "ts_subset_check"
+path = "src/lib.rs"
+
+[[bin]]
+name = "ts_subset_check"
+path = "src/main.rs"
+
+[dependencies]
+
+[profile.release]
+opt-level = 3

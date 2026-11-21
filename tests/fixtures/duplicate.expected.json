@@ -1,0 +1,1 @@
+{"schema_version":1,"ok":false,"summary":{"declarations":2,"diagnostics":1},"diagnostics":[{"code":"SC2002","severity":"error","message":"Cannot redeclare block-scoped variable 'a'.","span":{"start":{"line":2,"column":7},"end":{"line":2,"column":8}}}]}
