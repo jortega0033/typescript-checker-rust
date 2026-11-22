@@ -43,7 +43,7 @@ Notes:
 - The Python tests do not need the Rust binary. They use a stand-in script (`tests/test_support.py`), so a green Python run says nothing about the checker.
 - On Windows, stop the server with Ctrl+C. If it was started in the background, stop it by process id (`taskkill /PID <pid> /F`; from Git Bash write `//PID` and `//F`) and confirm the port is free. `kill` from Git Bash can leave it running.
 - `data/`, `target/` and `.prep/` are ignored by Git. Do not commit them.
-- There is no `.gitattributes` yet. On Windows with `core.autocrlf=true` the fixtures under `tests/fixtures/` are checked out with CRLF line endings, and the checker counts `` as a column. Do not "fix" an expected file to match a CRLF checkout; `#NEW-A` pins line endings.
+- There is no `.gitattributes` yet. On Windows with `core.autocrlf=true` the fixtures under `tests/fixtures/` are checked out with CRLF line endings, and the checker counts `\r` as a column. Do not "fix" an expected file to match a CRLF checkout; `#NEW-A` pins line endings.
 
 ### If your machine has no Rust toolchain
 
@@ -89,7 +89,7 @@ Changing any of these needs the owner's decision first; see the human gates in [
 
 Put this in the pull request, as pasted output or a link, not as a summary:
 
-1. The Rust checks: `cargo fmt --check`, `cargo clippy --all-targets -- -D warnings`, `cargo build --locked --release` and `cargo test --locked`, either from the linked CI run or pasted from a local run with the `rustc --version` line. Until `#NEW-A` is merged, a local run is the only source; if you could not run them, the ticket is not done.
+1. The Rust checks: `cargo fmt --check`, `cargo clippy --all-targets --locked -- -D warnings`, `cargo build --locked --release` and `cargo test --locked`, either from the linked CI run or pasted from a local run with the `rustc --version` line. Until `#NEW-A` is merged, a local run is the only source; if you could not run them, the ticket is not done.
 2. `python -m unittest discover -s tests`: the final lines with the test count.
 3. The verification commands and fixtures named in the issue, each with its observed result.
 4. For each acceptance criterion: the test name or fixture that shows it.
