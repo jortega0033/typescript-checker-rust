@@ -64,6 +64,16 @@ claude -p "List the project-level subagents defined in .claude/agents with the t
 
 The five reviewer roles and `loop-verifier` must report exactly `Read, Grep, Glob`.
 
+### What was observed, and what was not
+
+Observed on 2026-11-22 with Claude Code 2.1.323, headless (`claude -p`, model requested: haiku, no MCP servers), from the repository root, one run, on a machine that also has a user-level Agency Agents install (303 files, all nine names present there, none with a `tools:` line):
+
+- All ten names were listed (the nine roles above and `loop-verifier`). Software Architect, Code Reviewer, Codebase Onboarding Engineer, Application Security Engineer, Reality Checker and `loop-verifier` were listed with `Read, Grep, Glob`. Rust Refactoring Specialist, Developer Tooling Engineer, Backend Architect and Frontend Developer were listed with all tools.
+- A launched Reality Checker and a launched Application Security Engineer each reported exactly `Read`, `Grep`, `Glob`. The user-level copies have no `tools:` line, so the tool limits show that the project copies were the ones loaded.
+- A launched Rust Refactoring Specialist quoted the first sentence of its defining rule ("Execute the complete, coherent change set required by the requested refactoring objective."), so the role loads and carries the role text.
+- **Not shown:** which copy of the four implementer roles was loaded. The user-level copies of Rust Refactoring Specialist and Developer Tooling Engineer on that machine are byte-identical to the project copies, so no answer can tell them apart; Backend Architect and Frontend Developer were listed, not launched. Also not shown: behaviour in an interactive session, and behaviour on a machine without a user-level install (there the names must simply be listed).
+- The listing gives names and tools only, not the file a definition comes from. The statement above about which reviewer copies were loaded rests on the tool limits.
+
 ## Updating
 
 Fetch the same paths at a newer revision, re-apply the `tools:` line to the five reviewer roles, and update the revision and hashes in this file in the same commit.
