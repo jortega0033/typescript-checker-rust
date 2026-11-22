@@ -132,6 +132,7 @@ An implementer must keep these unless a ticket says otherwise and the PRD is cha
 5. **No continuous integration, no pinned toolchain, no lint or format configuration.** There is no `.github/` directory and no `rust-toolchain.toml`. On a machine without Rust nothing in `src/` can be verified. `#NEW-A` closes this first.
 6. **Known, documented divergence from TypeScript** (PRD section 5.1): numbers with leading zeros such as `007` are accepted, and comments are reported as `SC1004`. Issue #2 makes comments supported; the leading-zero case stays until the comparison in issue #6 lists it.
 7. **The page's text is tied to milestone M1.** The lead paragraph in `static/index.html:13` and the status text `No issues (N declarations)` in `static/app.js:140` describe declarations only. Each language ticket that widens the subset must check this text.
+8. **No `.gitattributes`.** Line endings of the fixtures depend on the Git settings of the machine. In the preparation worktree on Windows (`core.autocrlf=true`) `git ls-files --eol tests/fixtures` showed `i/lf w/crlf` for all eight files. The checker counts `` as a column (`src/lexer.rs:7-8`), so a fixture whose diagnostic sits at the end of a line can give a different span on Windows than on Linux. Whether the current four fixtures are affected was not tested (no toolchain); by reading, none of their diagnostics sits at a line end. `#NEW-A` pins line endings.
 
 ## 8. Risks for the planned work
 
