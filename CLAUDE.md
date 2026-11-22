@@ -118,7 +118,7 @@ To implement, continue or finish a GitHub issue, follow the playbook [`.claude/s
 | While coding | Frontend Developer | can edit | `ts_checker_web/static/` |
 | After coding | Application Security Engineer | read-only | a change that touches the tokenizer or parser, path handling, the request guards, the child process, or how the page renders checker or user text |
 | Every ticket: review gate | Code Reviewer | read-only | the full diff, before the pull request is opened |
-| Every ticket: acceptance gate | Reality Checker | read-only | each acceptance criterion against the local evidence that was produced, as the last gate before the draft pull request; it checks that CI is configured, not its result |
+| Every ticket: acceptance gate | Reality Checker | read-only | each acceptance criterion against the local evidence that was produced, as the acceptance gate after Code Reviewer and before the draft pull request; it checks that CI is configured, not its result |
 
 - The review gate and the acceptance gate run on every ticket, whatever its size. The other roles run when their row matches the change.
 - The read-only roles and `loop-verifier` are limited to `Read, Grep, Glob`. They cannot run commands: give them the diff, the acceptance criteria and the recorded command output.

@@ -31,5 +31,5 @@ The owner starts ticket work with `/next-ticket`; agents stop at a ready pull re
 ## Loop conventions
 
 - The loop runs at L1: report-only, started by hand. It proposes; it does not label, comment, close, edit source, push or merge.
-- No scheduler and no workflow file is installed by the loop setup. Do not add one for the loop without the owner's approval.
+- No scheduler and no loop workflow is installed by the loop setup (the CI workflow `.github/workflows/ci.yml` is separate). Do not add one for the loop without the owner's approval.
 - See [LOOP.md](LOOP.md) for the manual command and the human gates.
