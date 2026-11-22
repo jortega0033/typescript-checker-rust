@@ -27,7 +27,7 @@ If the PRD and the code disagree, do not pick one silently: say so in the pull r
 
 ## Setup and commands
 
-Requirements: a Rust toolchain with `cargo` (stable; the README records 1.100.0) and Python 3. No other packages.
+Requirements: a Rust toolchain with `cargo` (stable; the README records 1.100.0 and CI pins 1.100.0) and Python 3. No other packages.
 
 Run everything from the repository root.
 
@@ -54,7 +54,7 @@ Notes:
 Do not install one unless the owner asked for it. You can still read the code, run the Python tests and start the wrapper. For anything in `src/`, `tests/*.rs`, `tests/fixtures/`, `Cargo.toml` or `Cargo.lock`:
 
 - say plainly in the pull request that the Rust checks were not run locally;
-- rely on the CI run of the pull request (once #7 is merged) and link it;
+- rely on the CI run of the pull request (job `rust`) and link it;
 - never write "tests pass" for a command you did not see pass.
 
 ## Architecture boundaries
@@ -83,7 +83,7 @@ Changing any of these needs the owner's decision first; see the human gates in [
 
 ## Git workflow
 
-- The default branch is `main`. It is not protected, so the rules here are the protection.
+- The default branch is `main`. Branch protection (set by the owner) requires a pull request and green CI; the rules here apply on top of it.
 - One branch and one pull request per issue. Branch from the tip of `origin/main`. Name it after the issue, for example `issue-2-parser-ast`.
 - Keep commits small and their messages in the imperative, in English. Reference the issue in the pull request body (`Closes #N` only when every acceptance criterion is met).
 - Push the ticket branch and open the pull request only when the owner asked in the current session; starting `/next-ticket` counts as that request for that run. Open pull requests as drafts. The owner merges. Do not push to `main`, force-push a shared branch, publish the crate (`publish = false`), deploy or tag a release.
@@ -93,7 +93,7 @@ Changing any of these needs the owner's decision first; see the human gates in [
 
 Put this in the pull request, as pasted output or a link, not as a summary:
 
-1. The Rust checks: `cargo fmt --check`, `cargo clippy --all-targets --locked -- -D warnings`, `cargo build --locked --release` and `cargo test --locked`, either from the linked CI run or pasted from a local run with the `rustc --version` line. Until #7 is merged, a local run is the only source; if you could not run them, the ticket is not done.
+1. The Rust checks: `cargo fmt --check`, `cargo clippy --all-targets --locked -- -D warnings`, `cargo build --locked --release` and `cargo test --locked`, either from the linked CI run of the pull request (job `rust`, Linux and Windows) or pasted from a local run with the `rustc --version` line; if neither exists, the ticket is not done.
 2. `python -m unittest discover -s tests`: the final lines with the test count.
 3. The verification commands and fixtures named in the issue, each with its observed result.
 4. For each acceptance criterion: the test name or fixture that shows it.

@@ -84,7 +84,7 @@ The label after the score changed from L2 to L3 between the two runs although no
 
 ## Doctor suggestions that were not adopted
 
-`loop doctor` suggests a `docs/safety.md`, issue and pull request templates with workflows, and either worktree isolation notes or a `patterns/registry.yaml`. They were left out on purpose: the denylists and merge policy are in `loop-constraints.md`; a workflow for the loop would be the scheduler that L1 excludes (the CI workflow planned in the backlog is a separate matter and runs only on pushes and pull requests); at L1 the loop edits two report files and never works in a worktree; and a pattern registry belongs to the upstream project, not to a repository that uses one pattern.
+`loop doctor` suggests a `docs/safety.md`, issue and pull request templates with workflows, and either worktree isolation notes or a `patterns/registry.yaml`. They were left out on purpose: the denylists and merge policy are in `loop-constraints.md`; a workflow for the loop would be the scheduler that L1 excludes (the CI workflow in `.github/workflows/ci.yml` is a separate matter and runs only on pushes and pull requests); at L1 the loop edits two report files and never works in a worktree; and a pattern registry belongs to the upstream project, not to a repository that uses one pattern.
 
 ## Skills the scaffold names but did not install
 

@@ -22,7 +22,7 @@ The project subagents in `.claude/agents/` are part of the work. Delegate to the
 8. **Review gate, always.** Run Code Reviewer on the full diff. Fix every material finding, re-run the checks, and have the reviewer look again until no material finding is left.
 9. **Acceptance gate, always.** Run Reality Checker with the ticket's acceptance criteria and the evidence you produced. Do not call the ticket done unless it passes.
 10. **UI and writing check.** For a ticket that changed a screen, check each changed screen against `docs/ui-quality.md`. Run the `unslop` skill over user-facing copy, documentation and the pull request text before the pull request is opened.
-11. **Hand off.** Capture the evidence `CLAUDE.md` asks for. Open the pull request from `.github/pull_request_template.md`, naming the issue, only after both gates passed on the current diff (the gate hook enforces this). Add one line to `CHANGELOG.md` under Unreleased. Wait for CI and mark the pull request ready only when it is green on the current diff. The owner merges; never merge it yourself.
+11. **Hand off.** Capture the evidence `CLAUDE.md` asks for. Add one line to `CHANGELOG.md` under Unreleased. Then open the pull request as a draft from `.github/pull_request_template.md`, naming the issue, only after both gates passed on the current diff (the gate hook enforces this). Wait for CI and mark the pull request ready only when it is green on the current diff. The owner merges; never merge it yourself.
 
 ## Roles
 

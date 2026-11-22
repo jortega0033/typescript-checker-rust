@@ -100,4 +100,6 @@ This pass added, without changing any role definition except the two lines named
 - The `ui-ux-pro-max` and `unslop` skills under `.claude/skills/` (each with a `PROVENANCE.md`), `docs/ui-quality.md` and `docs/owner-decisions.md`.
 - One checklist line naming `docs/ui-quality.md` in the "In this repository" section of Frontend Developer and Code Reviewer. UI Designer, UX Architect and Accessibility Auditor are not installed here.
 
+The tailored "Your work here" sentence of Developer Tooling Engineer now says the CI workflow exists (kit-installed) and that #7 must keep its jobs, pinned SHAs and gate self-test step.
+
 This adds to the removal list under "Local change: automatic delegation": when comparing a role with upstream, the added `docs/ui-quality.md` checklist line is part of the "In this repository" section and is removed with it.
