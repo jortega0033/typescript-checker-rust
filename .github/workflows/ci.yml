@@ -52,8 +52,14 @@ jobs:
       - name: cargo fmt
         run: cargo fmt --check
       - name: cargo clippy
+        # run even if an earlier step failed, so every check reports
+        if: ${{ !cancelled() }}
         run: cargo clippy --all-targets --locked -- -D warnings
       - name: cargo build
+        # run even if an earlier step failed, so every check reports
+        if: ${{ !cancelled() }}
         run: cargo build --locked --release
       - name: cargo test
+        # run even if an earlier step failed, so every check reports
+        if: ${{ !cancelled() }}
         run: cargo test --locked
