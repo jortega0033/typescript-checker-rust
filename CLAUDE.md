@@ -16,7 +16,8 @@ Milestone M1 (primitive `let`/`const` declarations) is the baseline. Everything 
 | How the code is built, one traced request, invariants, what was verified, PRD drift | [docs/architecture.md](docs/architecture.md) |
 | How to build, run and smoke-test by hand | [README.md](README.md) |
 | What to build next, in which order | Epic issue #1 and its sub-issues on GitHub |
-| Agent roles available in this repository | [.claude/agency-agents/README.md](.claude/agency-agents/README.md) |
+| Which agent roles exist and when each runs | "Agents and ticket work" below; provenance in [.claude/agency-agents/README.md](.claude/agency-agents/README.md) |
+| The steps for implementing a ticket | [.claude/skills/implement-ticket/SKILL.md](.claude/skills/implement-ticket/SKILL.md) |
 | Issue triage loop (manual, report-only) | [LOOP.md](LOOP.md) |
 
 If the PRD and the code disagree, do not pick one silently: say so in the pull request and fix the wrong one in the same change.
@@ -97,25 +98,29 @@ Put this in the pull request, as pasted output or a link, not as a summary:
 6. `git diff --stat` against `origin/main`, and a line confirming no dependency was added (`[dependencies]` in `Cargo.toml` is empty, `Cargo.lock` lists only this package, no `requirements` or `package.json` file appeared).
 7. What was not verified, and why.
 
-## Agents
+## Agents and ticket work
 
-Project-local roles are in `.claude/agents/` and described in [.claude/agency-agents/README.md](.claude/agency-agents/README.md). The reviewer roles (Software Architect, Code Reviewer, Codebase Onboarding Engineer, Application Security Engineer, Reality Checker) and `loop-verifier` are limited to `Read, Grep, Glob`. Use Rust Refactoring Specialist for work in `src/`, Developer Tooling Engineer for command-line, CI and harness work, Backend Architect for `ts_checker_web/*.py`, and Frontend Developer for `ts_checker_web/static/`. Where a role text conflicts with this file, this file wins.
+The project roles are Claude Code subagents in `.claude/agents/`. Their source, licence and local changes are recorded in [.claude/agency-agents/README.md](.claude/agency-agents/README.md). Each role file starts with a section "In this repository", written for this project: the files the role owns or reviews, its commands or the output it must be given, the invariants it checks, the parts of the generic role text that do not apply here, and what it hands back. That section and this file override the generic text below it.
+
+To implement, continue or finish a GitHub issue, follow the playbook [`.claude/skills/implement-ticket/SKILL.md`](.claude/skills/implement-ticket/SKILL.md). Claude Code loads it on its own for ticket work; `/implement-ticket <issue number>` starts it by hand. Delegate to the roles without waiting to be asked; the "Use proactively ..." sentence at the end of each role's `description` is what makes Claude Code do so.
+
+| When | Role | Access | Use it for |
+|---|---|---|---|
+| Before coding | Codebase Onboarding Engineer | read-only | tracing the code paths of an area that is new to the session |
+| Before coding | Software Architect | read-only | a ticket that adds or changes a module boundary, the JSON contract, a command-line mode, an HTTP route or request shape, or a dependency |
+| While coding | Rust Refactoring Specialist | can edit | `src/`, `tests/*.rs`, `tests/fixtures/` |
+| While coding | Developer Tooling Engineer | can edit | the command line in `src/main.rs`, CI, the pinned toolchain, the comparison and timing harness |
+| While coding | Backend Architect | can edit | `ts_checker_web/*.py` and `tests/test_*.py` |
+| While coding | Frontend Developer | can edit | `ts_checker_web/static/` |
+| After coding | Application Security Engineer | read-only | a change that touches the tokenizer or parser, path handling, the request guards or the child process |
+| Every ticket: review gate | Code Reviewer | read-only | the full diff, before the pull request is opened |
+| Every ticket: acceptance gate | Reality Checker | read-only | each acceptance criterion against the evidence that was produced, as the last step |
+
+- The review gate and the acceptance gate run on every ticket, whatever its size. The other roles run when their row matches the change.
+- The read-only roles and `loop-verifier` are limited to `Read, Grep, Glob`. They cannot run commands: give them the diff, the acceptance criteria and the recorded command output.
+- The session or role that wrote a change does not count as its reviewer.
+- List the roles that ran and their verdicts in the pull request description under "Agent roles run".
 
 ## Loop
 
 Issue triage runs by hand at L1, report-only: it rewrites `issue-triage-state.md` and appends to `loop-run-log.md`, and does nothing else. No scheduler exists. See [LOOP.md](LOOP.md).
-
-## Ticket implementation: agent roles run automatically
-
-When asked to implement, continue or finish a GitHub issue, follow the playbook in [`.claude/skills/implement-ticket/SKILL.md`](.claude/skills/implement-ticket/SKILL.md). Claude Code loads it on its own for ticket work; `/implement-ticket <issue number>` starts it by hand.
-
-Delegate to the project subagents in `.claude/agents/` without waiting to be asked:
-
-- **Before coding:** Codebase Onboarding Engineer and Software Architect, as their descriptions say.
-- **While coding:** the implementing role that matches the files being changed.
-- **After coding:** each specialist reviewer whose trigger matches the change.
-- **On every ticket, before it is called done:** Code Reviewer, then Reality Checker.
-- The session that wrote a change does not count as its reviewer.
-- List the roles that ran and their verdicts in the pull request description under "Agent roles run".
-
-Each role's `description` ends with a "Use proactively ..." sentence, which is what makes Claude Code delegate to it without being told.

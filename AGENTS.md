@@ -22,6 +22,10 @@ python -m ts_checker_web --data-dir ./data --port 8765
 
 The server binds `127.0.0.1` only. `--data-dir` and `--port` are both required. Without a built checker the page still loads and every check answers `checker_unavailable`. Stop the server with Ctrl+C.
 
+## Ticket work
+
+To implement an issue, follow the steps in [.claude/skills/implement-ticket/SKILL.md](.claude/skills/implement-ticket/SKILL.md) and the section "Agents and ticket work" in [CLAUDE.md](CLAUDE.md). The roles it names are in `.claude/agents/`; each file starts with a section "In this repository" that holds the project rules for that role. An agent that cannot start those roles does each step itself, reads that section first, and says so in the pull request.
+
 ## Loop conventions
 
 - The loop runs at L1: report-only, started by hand. It proposes; it does not label, comment, close, edit source, push or merge.
