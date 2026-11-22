@@ -19,6 +19,9 @@ Milestone M1 (primitive `let`/`const` declarations) is the baseline. Everything 
 | Which agent roles exist and when each runs | "Agents and ticket work" below; provenance in [.claude/agency-agents/README.md](.claude/agency-agents/README.md) |
 | The steps for implementing a ticket | [.claude/skills/implement-ticket/SKILL.md](.claude/skills/implement-ticket/SKILL.md) |
 | Issue triage loop (manual, report-only) | [LOOP.md](LOOP.md) |
+| How a ticket goes from the queue to a ready pull request, who may do what | "Delivery workflow" below |
+| UI and copy rules | [docs/ui-quality.md](docs/ui-quality.md) |
+| Decisions the owner made, with dates | [docs/owner-decisions.md](docs/owner-decisions.md) |
 
 If the PRD and the code disagree, do not pick one silently: say so in the pull request and fix the wrong one in the same change.
 
@@ -36,7 +39,7 @@ Run everything from the repository root.
 | Rust tests (checker and binary) | `cargo test` | **No. Not run, same reason** |
 | Use the checker directly | `printf 'const ready: boolean = 2;\n' \| ./target/release/ts_subset_check; echo $?` | **No. Not run, same reason** |
 
-`cargo fmt --check` and `cargo clippy` are not documented or configured in the repository yet, and there is no CI. The first ticket of the batch (#7) adds a pinned toolchain and a CI workflow; after it, the CI run is the reference result for every Rust check.
+`.github/workflows/ci.yml` runs the Python tests and the four Rust checks on Linux and Windows. The Rust baseline has never been built in CI, so the first run may fail; report what it shows. The first ticket of the batch (#7) adds the pinned toolchain file, line-ending rules and the end-to-end test; after it, the CI run is the reference result for every Rust check.
 
 Notes:
 
@@ -83,7 +86,7 @@ Changing any of these needs the owner's decision first; see the human gates in [
 - The default branch is `main`. It is not protected, so the rules here are the protection.
 - One branch and one pull request per issue. Branch from the tip of `origin/main`. Name it after the issue, for example `issue-2-parser-ast`.
 - Keep commits small and their messages in the imperative, in English. Reference the issue in the pull request body (`Closes #N` only when every acceptance criterion is met).
-- Open pull requests as drafts. The owner merges. Do not push to `main`, force-push a shared branch, publish the crate (`publish = false`), deploy or tag a release.
+- Push the ticket branch and open the pull request only when the owner asked in the current session; starting `/next-ticket` counts as that request for that run. Open pull requests as drafts. The owner merges. Do not push to `main`, force-push a shared branch, publish the crate (`publish = false`), deploy or tag a release.
 - Do not edit the owner's working checkout or local files such as `.prep/`.
 
 ## Evidence before calling a ticket done
@@ -97,6 +100,7 @@ Put this in the pull request, as pasted output or a link, not as a summary:
 5. For anything that changes the page: the README smoke steps, run in a local browser against a server on `127.0.0.1` with the real binary, with what was seen at each step. Browser checks are manual; there is no browser automation in this repository.
 6. `git diff --stat` against `origin/main`, and a line confirming no dependency was added (`[dependencies]` in `Cargo.toml` is empty, `Cargo.lock` lists only this package, no `requirements` or `package.json` file appeared).
 7. What was not verified, and why.
+8. CI green on the current diff (linked run), both platforms.
 
 ## Agents and ticket work
 
@@ -120,6 +124,21 @@ To implement, continue or finish a GitHub issue, follow the playbook [`.claude/s
 - The read-only roles and `loop-verifier` are limited to `Read, Grep, Glob`. They cannot run commands: give them the diff, the acceptance criteria and the recorded command output.
 - The session or role that wrote a change does not count as its reviewer.
 - List the roles that ran and their verdicts in the pull request description under "Agent roles run".
+
+## Delivery workflow
+
+How a ticket reaches the owner. Each piece is described in its own file; this part only links them.
+
+- **Start:** the owner runs `/next-ticket` ([`.claude/skills/next-ticket/SKILL.md`](.claude/skills/next-ticket/SKILL.md)); it picks one ticket, creates the branch and worktree, and runs the playbook [`.claude/skills/implement-ticket/SKILL.md`](.claude/skills/implement-ticket/SKILL.md). Nothing is scheduled.
+- **Gate hook:** [`.claude/hooks/role_gate.py`](.claude/hooks/role_gate.py) blocks `gh pr create` and `gh pr ready` until Code Reviewer and Reality Checker ran after the last code edit. `ROLE_GATE=off` in the environment Claude Code is started from switches it off for that session; only the owner does that.
+- **Permissions:** [`.claude/settings.json`](.claude/settings.json). Edits to CI, agent configuration and Loop files ask first; force pushes, pushes to `main`, `gh pr merge`, releases and reads of `.env` are denied.
+- **CI:** [`.github/workflows/ci.yml`](.github/workflows/ci.yml). Jobs `test` and `rust` must be green on the current diff before a pull request is marked ready.
+- **Pull request:** [`.github/pull_request_template.md`](.github/pull_request_template.md). Tickets use [`.github/ISSUE_TEMPLATE/implementation-ticket.md`](.github/ISSUE_TEMPLATE/implementation-ticket.md).
+- **Labels:** `status:ready`, `status:blocked`, `status:in-progress`, `needs-decision`.
+- **Changelog:** every ticket pull request adds one line under Unreleased in [CHANGELOG.md](CHANGELOG.md).
+- **UI and copy:** [docs/ui-quality.md](docs/ui-quality.md); the `ui-ux-pro-max` and `unslop` skills are in `.claude/skills/`.
+- **Decisions:** [docs/owner-decisions.md](docs/owner-decisions.md). Security reports: [SECURITY.md](SECURITY.md).
+- **Merge and release:** only the owner merges and releases ([docs/RELEASING.md](docs/RELEASING.md)). An agent stops at a ready pull request.
 
 ## Loop
 

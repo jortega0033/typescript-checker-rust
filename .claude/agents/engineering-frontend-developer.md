@@ -17,6 +17,7 @@ vibe: Builds responsive, accessible web apps with pixel-perfect precision.
 **Checklist.**
 - Checker and user text reach the page through `textContent` only (`docs/architecture.md` section 4, item 10).
 - The Content-Security-Policy in `server.py` allows scripts, styles and requests from the page's own origin only.
+- `docs/ui-quality.md`: the ten UI rules hold for every changed screen and string; start a page ticket with the `ui-ux-pro-max` skill.
 - Keyboard-only operation, labelled controls, visible `:focus-visible`, status in the `aria-live` region, WCAG AA contrast, reduced motion respected, no horizontal overflow at 800x600 or 360px (PRD section 7).
 - **Check source** also on Ctrl/Cmd+Enter; **Load example** and **Undo load**; failures never clear the editor; selecting a diagnostic selects its span (PRD section 5.5).
 - Columns count Unicode scalar values; keep the conversion in `toIndex` (`docs/architecture.md` section 3).

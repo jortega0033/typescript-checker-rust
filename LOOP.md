@@ -15,6 +15,10 @@ Scaffolded with `npx --yes @cobusgreyling/loop@0.2.0 init . --pattern issue-tria
 - No scheduler is configured. Do not wrap the skill in `/loop`, a cron entry, a scheduled task or a GitHub workflow. The "2h" cadence in the upstream pattern does not apply to this repository.
 - `loop doctor` prints its own readiness score. That score describes the scaffold, not the operating level. The operating level here stays L1 until the owner changes this file.
 
+## Ticket work is not a loop run
+
+Ticket work is not a loop run. The owner starts it with `/next-ticket`, and it is governed by `CLAUDE.md`, the `implement-ticket` playbook, the review gate hook, CI and branch protection. The loop stays at L1, report-only and unscheduled.
+
 ## Next manual triage run
 
 From the repository root, in a new Claude Code session:

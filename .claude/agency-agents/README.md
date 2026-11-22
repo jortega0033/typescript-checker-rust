@@ -89,3 +89,15 @@ This supersedes any statement above that a role file is unmodified or that the `
 The steps at which each role runs are in `.claude/skills/implement-ticket/SKILL.md` and in `CLAUDE.md`, section "Agents and ticket work".
 
 Verification, 2026-11-22 (after the "In this repository" sections were inserted): one headless run from the repository root with Claude Code 2.1.323, `claude -p "List every project subagent defined in .claude/agents with its exact name and tools, say for each whether its instructions begin with a section titled In this repository, and say whether a skill named implement-ticket is available. Plain list, no commentary." --model haiku`, exit code 0. The answer listed all ten names. Code Reviewer, Codebase Onboarding Engineer, Software Architect, Application Security Engineer, Reality Checker and `loop-verifier` were listed with `Read, Grep, Glob`; Backend Architect, Developer Tooling Engineer, Frontend Developer and Rust Refactoring Specialist with no `tools` line in the frontmatter. It answered "yes" to the "In this repository" question for the nine Agency Agents roles and "no" for `loop-verifier`, and reported the skill `implement-ticket` as available. Not shown by this run: whether that answer came from the loaded definitions or from reading the files, the behaviour of a launched role, and automatic delegation during a real ticket; no role was launched.
+
+## Local change: SDLC kit (2026-11-22)
+
+This pass added, without changing any role definition except the two lines named below:
+
+- The review gate hook `.claude/hooks/role_gate.py` (gate roles Code Reviewer and Reality Checker, both already installed) and `.claude/settings.json`.
+- `.github/workflows/ci.yml`, pull request and issue templates, `CODEOWNERS`, `dependabot.yml`, `SECURITY.md`, `CHANGELOG.md`, `docs/RELEASING.md`.
+- The `next-ticket` driver skill, and updates to the `implement-ticket` playbook and `CLAUDE.md` ("Delivery workflow").
+- The `ui-ux-pro-max` and `unslop` skills under `.claude/skills/` (each with a `PROVENANCE.md`), `docs/ui-quality.md` and `docs/owner-decisions.md`.
+- One checklist line naming `docs/ui-quality.md` in the "In this repository" section of Frontend Developer and Code Reviewer. UI Designer, UX Architect and Accessibility Auditor are not installed here.
+
+This adds to the removal list under "Local change: automatic delegation": when comparing a role with upstream, the added `docs/ui-quality.md` checklist line is part of the "In this repository" section and is removed with it.

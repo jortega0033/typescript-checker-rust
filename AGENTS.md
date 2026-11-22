@@ -26,6 +26,8 @@ The server binds `127.0.0.1` only. `--data-dir` and `--port` are both required. 
 
 To implement an issue, follow the steps in [.claude/skills/implement-ticket/SKILL.md](.claude/skills/implement-ticket/SKILL.md) and the section "Agents and ticket work" in [CLAUDE.md](CLAUDE.md). The roles it names are in `.claude/agents/`; each file starts with a section "In this repository" that holds the project rules for that role; where that section and `CLAUDE.md` differ, `CLAUDE.md` wins. An agent that cannot start those roles does each step itself, reads that section first, and says so in the pull request.
 
+The owner starts ticket work with `/next-ticket`; agents stop at a ready pull request and only the owner merges. See the "Delivery workflow" part of [CLAUDE.md](CLAUDE.md).
+
 ## Loop conventions
 
 - The loop runs at L1: report-only, started by hand. It proposes; it does not label, comment, close, edit source, push or merge.

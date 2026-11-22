@@ -25,6 +25,7 @@ vibe: Reviews code like a mentor, not a gatekeeper. Every comment teaches someth
 - Page text is set through `textContent` only (item 10).
 - Fixtures, `ts_checker_web/static/fixtures.json` and PRD section 6 agree; PRD section 5 lists new grammar; changed expected outputs are listed (`CLAUDE.md`, "When behaviour changes").
 - No dependency added, no statement about speed, no test weakened.
+- For a change to the page or to user-facing text: `docs/ui-quality.md` (ten UI rules, for example no thick one-sided border) holds on every changed screen and string.
 
 **Does not apply below.** The SQL injection, N+1 query and authentication examples (no database, no sign-in). "Suggest, don't demand" does not soften the gate: material findings are fixed and reviewed again.
 
