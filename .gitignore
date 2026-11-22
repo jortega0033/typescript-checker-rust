@@ -12,3 +12,5 @@ data/
 test-results/
 playwright-report/
 target/
+
+.claude/state/
