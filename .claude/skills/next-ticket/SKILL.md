@@ -25,8 +25,8 @@ Epic: #1 (`jortega0033/typescript-checker-rust`). Dependency order: #7, #2, #3, 
 4. **Branch in a fresh worktree**, as `CLAUDE.md` "Git workflow" says: `git fetch origin`, then `git worktree add ../typescript-checker-rust-issue-<n> -b issue-<n>-<short-slug> origin/main`. One branch and one pull request per issue. Never work on `main` and never touch the owner's checkout.
 5. **Run the playbook** [`.claude/skills/implement-ticket/SKILL.md`](../implement-ticket/SKILL.md) for the ticket, in the new worktree. It runs the roles, both gates, the evidence list of `CLAUDE.md` and the UI and writing checks.
 6. **Open the pull request** only after Code Reviewer and Reality Checker both ran on the current diff and passed. Push the branch (`git push -u origin <branch>`; the review gate hook blocks `gh pr create` and `gh pr ready` until both gates have run after the last code edit) and open it as a draft (`gh pr create --draft`) from `.github/pull_request_template.md` with `Closes #<n>` only when every acceptance criterion is met. Never leave a gate open to open the pull request.
-7. **Wait for CI.** `gh pr checks`. Fix failures and re-run the gates on the new diff. Mark the pull request ready (`gh pr ready`) only when CI is green on the current diff.
-8. **Report on the issue.** Comment on the issue with the pull request link, the CI result and anything not verified. Keep the label `status:in-progress` until the owner merges.
+7. **Wait for CI.** `gh pr checks`. If it fails, fix, re-run the local checks and both gates on the new diff, and push. Mark the pull request ready (`gh pr ready`) only when CI is green on the current diff; green CI is checked here, not by Reality Checker.
+8. **Report on the issue.** Comment on the issue with the pull request link, the CI run link and result, and anything not verified. Keep the label `status:in-progress` until the owner merges.
 9. **Stop.** Print one summary: ticket, branch, pull request, CI result, open questions. The owner merges.
 
 ## Stop and say so

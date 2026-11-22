@@ -54,7 +54,7 @@ Notes:
 Do not install one unless the owner asked for it. You can still read the code, run the Python tests and start the wrapper. For anything in `src/`, `tests/*.rs`, `tests/fixtures/`, `Cargo.toml` or `Cargo.lock`:
 
 - say plainly in the pull request that the Rust checks were not run locally;
-- rely on the CI run of the pull request (job `rust`) and link it;
+- leave the Rust checks to the CI run (job `rust`) of the draft pull request, and mark the pull request ready only when that run is green; the gates check that the job is configured, not its result;
 - never write "tests pass" for a command you did not see pass.
 
 ## Architecture boundaries
@@ -91,16 +91,16 @@ Changing any of these needs the owner's decision first; see the human gates in [
 
 ## Evidence before calling a ticket done
 
-Put this in the pull request, as pasted output or a link, not as a summary:
+Put this in the pull request, as pasted output or a link, not as a summary. The order is fixed: local checks, then Code Reviewer and Reality Checker on the full diff and the recorded local evidence, then the draft pull request, then CI, then ready only when CI is green. A pull request is never opened or marked ready with a gate not run.
 
-1. The Rust checks: `cargo fmt --check`, `cargo clippy --all-targets --locked -- -D warnings`, `cargo build --locked --release` and `cargo test --locked`, either from the linked CI run of the pull request (job `rust`, Linux and Windows) or pasted from a local run with the `rustc --version` line; if neither exists, the ticket is not done.
+1. The Rust checks: `cargo fmt --check`, `cargo clippy --all-targets --locked -- -D warnings`, `cargo build --locked --release` and `cargo test --locked`, pasted from a local run with the `rustc --version` line; on a machine without a Rust toolchain, say they were not run locally and that job `rust` of `.github/workflows/ci.yml` is configured to run them; the CI result is item 8, not a gate input.
 2. `python -m unittest discover -s tests`: the final lines with the test count.
 3. The verification commands and fixtures named in the issue, each with its observed result.
 4. For each acceptance criterion: the test name or fixture that shows it.
 5. For anything that changes the page: the README smoke steps, run in a local browser against a server on `127.0.0.1` with the real binary, with what was seen at each step. Browser checks are manual; there is no browser automation in this repository.
 6. `git diff --stat` against `origin/main`, and a line confirming no dependency was added (`[dependencies]` in `Cargo.toml` is empty, `Cargo.lock` lists only this package, no `requirements` or `package.json` file appeared).
 7. What was not verified, and why.
-8. CI green on the current diff (linked run), both platforms.
+8. CI green on the current diff (linked run), both platforms. It comes after the draft pull request exists; the driver checks it before `gh pr ready` and links the run in a comment on the issue. Reality Checker is not asked to confirm it.
 
 ## Agents and ticket work
 
@@ -118,7 +118,7 @@ To implement, continue or finish a GitHub issue, follow the playbook [`.claude/s
 | While coding | Frontend Developer | can edit | `ts_checker_web/static/` |
 | After coding | Application Security Engineer | read-only | a change that touches the tokenizer or parser, path handling, the request guards, the child process, or how the page renders checker or user text |
 | Every ticket: review gate | Code Reviewer | read-only | the full diff, before the pull request is opened |
-| Every ticket: acceptance gate | Reality Checker | read-only | each acceptance criterion against the evidence that was produced, as the last step |
+| Every ticket: acceptance gate | Reality Checker | read-only | each acceptance criterion against the local evidence that was produced, as the last gate before the draft pull request; it checks that CI is configured, not its result |
 
 - The review gate and the acceptance gate run on every ticket, whatever its size. The other roles run when their row matches the change.
 - The read-only roles and `loop-verifier` are limited to `Read, Grep, Glob`. They cannot run commands: give them the diff, the acceptance criteria and the recorded command output.
