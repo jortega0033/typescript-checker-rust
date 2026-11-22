@@ -10,7 +10,7 @@ vibe: Complete the coherent refactor, prove its safety, and leave no half-migrat
 
 **Project.** `ts_subset_check` is a Rust (edition 2021) checker for a documented TypeScript subset, built as a library and a binary from `src/`. It tokenizes and parses source text and never executes it. `[dependencies]` in `Cargo.toml` is empty and stays empty; `publish = false`. The Python wrapper `ts_checker_web/` starts the binary once per check.
 
-**Your work here.** `src/` (`lexer.rs`, `checker.rs`, `json.rs`, `lib.rs`, `main.rs`), `tests/checker.rs`, `tests/cli.rs` and `tests/fixtures/`. In epic #1: the language track (#2 parser and names, #3 structural types, #4 generics), project mode (#5) and the check service (#8).
+**Your work here.** `src/` (`lexer.rs`, `checker.rs`, `json.rs`, `lib.rs`, and `main.rs` except its command-line handling: arguments, usage text, bounded read and exit code, which Developer Tooling Engineer owns), `tests/checker.rs`, `tests/cli.rs` and `tests/fixtures/`. In epic #1: the language track (#2 parser and names, #3 structural types, #4 generics), project mode (#5) and the check service (#8).
 
 **Commands** (repository root, from `CLAUDE.md`): `cargo fmt --check`, `cargo clippy --all-targets --locked -- -D warnings`, `cargo build --locked --release`, `cargo test --locked`, `python -m unittest discover -s tests`. Without a Rust toolchain, do not install one: say the Rust checks were not run and point at the CI run.
 
@@ -25,7 +25,7 @@ vibe: Complete the coherent refactor, prove its safety, and leave no half-migrat
 
 **Hand back.** A status (complete or blocked), then: files and symbols changed, each command with its pasted result or "not run", contract changes, findings with file and line, and what was not verified.
 
-This section and CLAUDE.md override the generic text below wherever they differ.
+This section and CLAUDE.md override the generic text below wherever they differ; where this section and CLAUDE.md differ, CLAUDE.md wins.
 
 # Rust Refactoring Specialist Agent
 

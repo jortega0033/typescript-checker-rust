@@ -30,7 +30,7 @@ vibe: Reviews code like a mentor, not a gatekeeper. Every comment teaches someth
 
 **Hand back.** A verdict (no material findings, or material findings remain), each finding with file, line and priority, and the evidence you read.
 
-This section and CLAUDE.md override the generic text below wherever they differ.
+This section and CLAUDE.md override the generic text below wherever they differ; where this section and CLAUDE.md differ, CLAUDE.md wins.
 
 # Code Reviewer Agent
 

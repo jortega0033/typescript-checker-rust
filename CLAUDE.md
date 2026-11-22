@@ -100,7 +100,7 @@ Put this in the pull request, as pasted output or a link, not as a summary:
 
 ## Agents and ticket work
 
-The project roles are Claude Code subagents in `.claude/agents/`. Their source, licence and local changes are recorded in [.claude/agency-agents/README.md](.claude/agency-agents/README.md). Each role file starts with a section "In this repository", written for this project: the files the role owns or reviews, its commands or the output it must be given, the invariants it checks, the parts of the generic role text that do not apply here, and what it hands back. That section and this file override the generic text below it.
+The project roles are Claude Code subagents in `.claude/agents/`. Their source, licence and local changes are recorded in [.claude/agency-agents/README.md](.claude/agency-agents/README.md). Each role file starts with a section "In this repository", written for this project: the files the role owns or reviews, its commands or the output it must be given, the invariants it checks, the parts of the generic role text that do not apply here, and what it hands back. That section and this file override the generic upstream text that follows the section in each role file; where a role's section and this file differ, this file wins.
 
 To implement, continue or finish a GitHub issue, follow the playbook [`.claude/skills/implement-ticket/SKILL.md`](.claude/skills/implement-ticket/SKILL.md). Claude Code loads it on its own for ticket work; `/implement-ticket <issue number>` starts it by hand. Delegate to the roles without waiting to be asked; the "Use proactively ..." sentence at the end of each role's `description` is what makes Claude Code do so.
 
@@ -108,11 +108,11 @@ To implement, continue or finish a GitHub issue, follow the playbook [`.claude/s
 |---|---|---|---|
 | Before coding | Codebase Onboarding Engineer | read-only | tracing the code paths of an area that is new to the session |
 | Before coding | Software Architect | read-only | a ticket that adds or changes a module boundary, the JSON contract, a command-line mode, an HTTP route or request shape, or a dependency |
-| While coding | Rust Refactoring Specialist | can edit | `src/`, `tests/*.rs`, `tests/fixtures/` |
-| While coding | Developer Tooling Engineer | can edit | the command line in `src/main.rs`, CI, the pinned toolchain, the comparison and timing harness |
-| While coding | Backend Architect | can edit | `ts_checker_web/*.py` and `tests/test_*.py` |
+| While coding | Rust Refactoring Specialist | can edit | `src/` except the command-line handling in `src/main.rs`, `tests/*.rs`, `tests/fixtures/` |
+| While coding | Developer Tooling Engineer | can edit | the command-line handling in `src/main.rs` (arguments, usage text, bounded read, exit code), `Cargo.toml` and `Cargo.lock`, CI, the pinned toolchain and `.gitattributes`, the comparison and timing harness |
+| While coding | Backend Architect | can edit | `ts_checker_web/*.py` and `tests/test_*.py`, including the end-to-end and fixture-sync tests of #7 and the `STATIC_ROUTES` entry for a new static file |
 | While coding | Frontend Developer | can edit | `ts_checker_web/static/` |
-| After coding | Application Security Engineer | read-only | a change that touches the tokenizer or parser, path handling, the request guards or the child process |
+| After coding | Application Security Engineer | read-only | a change that touches the tokenizer or parser, path handling, the request guards, the child process, or how the page renders checker or user text |
 | Every ticket: review gate | Code Reviewer | read-only | the full diff, before the pull request is opened |
 | Every ticket: acceptance gate | Reality Checker | read-only | each acceptance criterion against the evidence that was produced, as the last step |
 

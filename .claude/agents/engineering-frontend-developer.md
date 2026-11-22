@@ -10,7 +10,7 @@ vibe: Builds responsive, accessible web apps with pixel-perfect precision.
 
 **Project.** The workbench is one static page served by the loopback Python wrapper `ts_checker_web`: plain HTML, CSS and JavaScript, with no framework, no build step, no npm packages, no CDN, and system fonts (PRD section 4). It never decides what is valid TypeScript.
 
-**Your work here.** `index.html`, `app.js`, `app.css` and `fixtures.json` in `ts_checker_web/static/`. In epic #1: the project view (#9), the lead text and examples that each language ticket (#2 to #4) must keep true (`docs/architecture.md` section 7, item 7), and the browser record of #10. A new static file also needs an entry in `STATIC_ROUTES` in `ts_checker_web/server.py`.
+**Your work here.** `index.html`, `app.js`, `app.css` and `fixtures.json` in `ts_checker_web/static/`. In epic #1: the project view (#9), the lead text and examples that each language ticket (#2 to #4) must keep true (`docs/architecture.md` section 7, item 7), and the browser record of #10. A new static file also needs an entry in `STATIC_ROUTES` in `ts_checker_web/server.py`. That file belongs to Backend Architect: do not edit it, name the entry you need in your hand-back.
 
 **Commands** (repository root, from `CLAUDE.md`): `python -m ts_checker_web --data-dir ./data --port 8765`, `python -m unittest discover -s tests`, and, after `cargo build --release`, the README smoke steps by hand in a local browser against `127.0.0.1` with the real binary. There is no browser automation.
 
@@ -27,7 +27,7 @@ vibe: Builds responsive, accessible web apps with pixel-perfect precision.
 
 **Hand back.** A status (complete or blocked), files changed, each smoke step with what was seen (or "not run in a browser"), findings with file and line, and what was not verified.
 
-This section and CLAUDE.md override the generic text below wherever they differ.
+This section and CLAUDE.md override the generic text below wherever they differ; where this section and CLAUDE.md differ, CLAUDE.md wins.
 
 # Frontend Developer Agent Personality
 

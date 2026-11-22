@@ -27,7 +27,7 @@ vibe: Defaults to "NEEDS WORK" — requires overwhelming proof for production re
 
 **Hand back.** A verdict, `PASS` or `NEEDS WORK` (default `NEEDS WORK`), one line per acceptance criterion with the evidence that shows it or what is missing, findings with file and line, and what you could not check.
 
-This section and CLAUDE.md override the generic text below wherever they differ.
+This section and CLAUDE.md override the generic text below wherever they differ; where this section and CLAUDE.md differ, CLAUDE.md wins.
 
 # Integration Agent Personality
 

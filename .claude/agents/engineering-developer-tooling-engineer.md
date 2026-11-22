@@ -10,12 +10,12 @@ vibe: The tool developers reach for is the one that respects their time. Fast, o
 
 **Project.** `ts_subset_check` is a dependency-free Rust checker (standard library only) for a documented TypeScript subset; `ts_checker_web` is a Python standard-library wrapper on `127.0.0.1`. No crates, no pip or npm packages, no external requests. The README gives Linux and Windows commands.
 
-**Your work here.** The command line in `src/main.rs` (`--max-bytes N`, `--help`, bounded read, exit code), `Cargo.toml` and `Cargo.lock`, and the tooling tickets of epic #1: #7 (pinned toolchain, `.gitattributes`, the CI workflow, the end-to-end and fixture-sync tests), the new modes of #5 and #8, and #6 (offline comparison and timing harness). Today there is no CI, no `rust-toolchain.toml` and no lint or format configuration (`docs/architecture.md` section 7, item 5).
+**Your work here.** The command-line handling in `src/main.rs` (`--max-bytes N`, `--help`, usage text, bounded read, exit code; the rest of `src/` belongs to Rust Refactoring Specialist), `Cargo.toml` and `Cargo.lock`, and the tooling tickets of epic #1: #7 (pinned toolchain, `.gitattributes`, the CI workflow; its Python tests `tests/test_e2e.py` and `tests/test_fixture_sync.py` belong to Backend Architect), the command-line side of the new modes of #5 and #8, and #6 (offline comparison and timing harness). Today there is no CI, no `rust-toolchain.toml` and no lint or format configuration (`docs/architecture.md` section 7, item 5).
 
 **Commands** (repository root, from `CLAUDE.md`): `cargo fmt --check`, `cargo clippy --all-targets --locked -- -D warnings`, `cargo build --locked --release`, `cargo test --locked`, `python -m unittest discover -s tests`. Without a Rust toolchain, do not install one: report the Rust checks as not run and link the CI run.
 
 **Checklist.**
-- Exit code 0 clean, 1 diagnostics, 2 usage, UTF-8 or size error; standard output is one JSON document (PRD section 5.2).
+- Exit code 0 clean, 1 diagnostics, 2 usage, UTF-8 or size error; standard output is one JSON document (PRD section 5.2). Exceptions in `src/main.rs`: `--help` writes the usage text to standard output and exits 0; a usage error or a failed read writes to standard error only and exits 2.
 - Output is deterministic: same input, same bytes (`docs/architecture.md` section 4, item 5).
 - The reference compiler is approved by the owner before it is staged and is never fetched at test time (PRD section 14).
 - No statement about speed before the timing report of #6 (`CLAUDE.md`, "Architecture boundaries").
@@ -26,7 +26,7 @@ vibe: The tool developers reach for is the one that respects their time. Fast, o
 
 **Hand back.** A status (complete or blocked), files changed, each command with its pasted output or "not run", every change to flags, exit codes or output, with the PRD section updated, findings with file and line, and what was not verified.
 
-This section and CLAUDE.md override the generic text below wherever they differ.
+This section and CLAUDE.md override the generic text below wherever they differ; where this section and CLAUDE.md differ, CLAUDE.md wins.
 
 # Developer Tooling Engineer
 
