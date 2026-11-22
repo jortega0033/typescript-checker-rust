@@ -71,11 +71,16 @@ Run on 2026-11-22 (Windows 11, Node v22.23.4) in the Git worktree after the scaf
 - `doctor .`: `Ready: 100/100 L2` ("Strong structure but no proven loop runs yet"), `Status: HEALTHY (exit 0)`, files `state=issue-triage-state.md LOOP.md=yes budget=yes run-log=yes gate=no`, `Sync: n/a`, note "Could not parse loop-sync JSON output". Suggested next actions: a `docs/safety.md`, issue and pull request templates with workflows, and worktree isolation notes (see the next section).
 - `status .`: pattern `issue-triage`, `Ready: 100/100 L2`, state "not yet run", `gate=no`, `constraints=yes`, no recent runs. Its closing line suggests scheduling a first run; that advice is not followed here, runs stay manual.
 
-The label after the score (L2, or L3 once the files are committed) is the tool's view of the scaffold and follows the repository state, not the configuration. No run of the loop has taken place and the operating level stays L1.
+Run again on 2026-11-22 in the same worktree after the files above were committed:
+
+- `doctor .`: `Ready: 100/100 L3` ("good candidate for L3 with explicit gates"), `Status: HEALTHY (exit 0)`, process exit code 0, the same files line and note; its third suggestion is now a `patterns/registry.yaml` instead of worktree isolation notes.
+- `status .`: the same lines with `Ready: 100/100 L3`, process exit code 0.
+
+The label after the score changed from L2 to L3 between the two runs although no loop file changed, so it follows the repository state, not the configuration. It is the tool's view of the scaffold. No run of the loop has taken place and the operating level stays L1.
 
 ## Doctor suggestions that were not adopted
 
-`loop doctor` suggests a `docs/safety.md`, issue and pull request templates with workflows, and worktree isolation notes. They were left out on purpose: the denylists and merge policy are in `loop-constraints.md`; a workflow for the loop would be the scheduler that L1 excludes (the CI workflow planned in the backlog is a separate matter and runs only on pushes and pull requests); and at L1 the loop edits two report files and never works in a worktree.
+`loop doctor` suggests a `docs/safety.md`, issue and pull request templates with workflows, and either worktree isolation notes or a `patterns/registry.yaml`. They were left out on purpose: the denylists and merge policy are in `loop-constraints.md`; a workflow for the loop would be the scheduler that L1 excludes (the CI workflow planned in the backlog is a separate matter and runs only on pushes and pull requests); at L1 the loop edits two report files and never works in a worktree; and a pattern registry belongs to the upstream project, not to a repository that uses one pattern.
 
 ## Links
 

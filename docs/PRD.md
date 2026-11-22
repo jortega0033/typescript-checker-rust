@@ -2,6 +2,8 @@
 
 Status legend: **[Baseline]** = implemented in M1 (see [baseline verification](../README.md#baseline-verification)); **[Future]** = not implemented.
 
+The engineering map (module boundaries, one traced request, invariants, and where this document and the code disagree) is in [architecture.md](architecture.md).
+
 ## 1. Purpose, user and workflow
 
 **User:** one TypeScript developer working offline on their own machine who wants to see what a type checker does and compare deterministic diagnostics against a small, explicit subset.
@@ -136,7 +138,7 @@ Start the server, load the **Type mismatch** example, press **Check source**: st
 - Rust integration tests: fixtures with expected JSON, code coverage per code, CRLF and non-ASCII columns, exit codes.
 - Python `unittest` (`python -m unittest discover -s tests`): server on an ephemeral port with a temporary data directory, request validation, Host/Origin, static allowlist, checker failures through an injected command.
 - Browser smoke: README steps, including an 800x600 viewport.
-- Status: tests are authored; none are recorded as passing yet.
+- Status: the runs the owner recorded for M1 are listed under [baseline verification](../README.md#baseline-verification). What was re-run during repository preparation on 2026-11-22, and what could not be run there (every Rust check: no toolchain on that machine), is recorded in [architecture.md](architecture.md), section 1.
 
 ## 14. Future work: one epic, five issues
 
