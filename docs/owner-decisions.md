@@ -19,7 +19,7 @@ Entries 1 to 12 are dated 2026-11-22; later entries carry their own date.
 | 11 | Rust is verified in CI only; nothing is installed on the owner's PC. | 2026-11-22 | `.github/workflows/ci.yml` (job `rust`), `CLAUDE.md` "If your machine has no Rust toolchain" |
 | 12 | The ten UI rules in `docs/ui-quality.md` are binding, and the `ui-ux-pro-max` and `unslop` skills are installed in the repository and used for UI work and for copy. | 2026-11-22 | `docs/ui-quality.md`, `.claude/skills/ui-ux-pro-max/`, `.claude/skills/unslop/`, `.claude/skills/implement-ticket/SKILL.md` |
 | 13 | Visual system: Pipenzo Flow look tokens (docs/design-tokens.md). SDLC kit version: jortega0033/sdlc-kit v1.0.0. | 2026-11-23 | `ts_checker_web/static/tokens.css`, `ts_checker_web/static/app.css`, `docs/design-tokens.md` |
-| 14 | Yellow accent, focus ring, themes, linking and one planner button (see the list below the table). | 2026-11-23 | `docs/design-tokens.md` |
+| 14 | Yellow accent, focus ring, themes and linking: D1 to D4 (see the list below the table). | 2026-11-23 | `docs/design-tokens.md`, `docs/ui-quality.md` |
 
 ## Entry 14 detail (2026-11-23)
 
@@ -27,7 +27,7 @@ Entries 1 to 12 are dated 2026-11-22; later entries carry their own date.
 - D2 Focus ring: --focus is a focus indicator, exempt from the accent limit, including where it is yellow in dark. A ticket that says the focus style stays unchanged means the rule on main after the token pull request. Recommended by the orchestrator, adopted under the owner's delegation of 2026-11-23.
 - D3 Themes: contrast and no-colour-alone checks cover both the light and the dark block of tokens.css. Recommended by the orchestrator, adopted under the owner's delegation of 2026-11-23.
 - D4 Linking: a ticket that creates a page or its static allowlist links tokens.css before any other stylesheet and serves it (allowlist and its test). Recommended by the orchestrator, adopted under the owner's delegation of 2026-11-23.
-- D5 release-dependency-planner: while a plan is open only one yellow primary button shows; "New plan" (#new-plan) becomes neutral, in ticket #11. Recommended by the orchestrator, adopted under the owner's delegation of 2026-11-23.
+- D5 does not apply to this repository (jortega0033/release-dependency-planner#11).
 
 ## Open ticket decisions settled by default (entry 10)
 

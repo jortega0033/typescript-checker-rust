@@ -21,6 +21,7 @@ Binding rules for the workbench page (`ts_checker_web/static/`) and for every us
 - User-facing copy, documentation and pull request text go through the `unslop` skill (`.claude/skills/unslop/`) before the pull request is opened.
 - Frontend Developer and Code Reviewer name this file in their checklists (`.claude/agents/`). The Code Reviewer gate runs on every ticket and is where these rules are enforced.
 - Rule 1 can be linted, for example `grep -nE "border-(left|right|top|bottom)[^;]*[2-9]px" ts_checker_web/static/app.css`. Rule 2 cannot be detected reliably from CSS, so it is a review check.
+- Rule 8 is read with the "Yellow accent" and "Focus ring" sections of [design-tokens.md](design-tokens.md) and owner decision 14 in [owner-decisions.md](owner-decisions.md): the accent also marks the current step, and `--focus` is a focus indicator, exempt from the accent limit.
 - The repository rules in `CLAUDE.md` still apply: native HTML, CSS and JavaScript, system fonts, no build step, no dependency, no external request, text set through `textContent` only.
 
 The colours come from the shared tokens; see [design-tokens.md](design-tokens.md).
