@@ -80,7 +80,7 @@ Spans are 1-based; columns count Unicode scalar values; `end` is exclusive. Diag
 Recovery: after a syntax diagnostic, skip through the next `;` and resume; at most one syntax diagnostic per statement.
 
 ### 5.4 HTTP API [Baseline]
-- `GET /` workbench; `GET /static/{app.css,app.js,fixtures.json}` (exact allowlist); `GET /api/v1/health` returns `{"status":"ok","schema_version":1,"checker":{"available":bool}}`.
+- `GET /` workbench; `GET /static/{tokens.css,app.css,app.js,fixtures.json}` (exact allowlist); `GET /api/v1/health` returns `{"status":"ok","schema_version":1,"checker":{"available":bool}}`.
 - `POST /api/v1/check` with `{"source": string}` (JSON content type, source at most 65536 UTF-8 bytes, body at most 262144 bytes). Success is HTTP 200 with the checker object plus final key `exit_code`. Errors: 400 `invalid_request`, 403 `forbidden_origin`, 404 `not_found`, 405, 411 `length_required`, 413 `too_large`, 415 `unsupported_media_type`, 502 `checker_failed`, 503 `checker_unavailable`/`busy`, 504 `checker_timeout`, each as `{"error":{"code","message"}}`.
 - The wrapper sends no CORS headers, binds 127.0.0.1 only, validates `Host` (and `Origin` when present), and applies a restrictive Content-Security-Policy.
 
