@@ -22,3 +22,5 @@ Binding rules for the workbench page (`ts_checker_web/static/`) and for every us
 - Frontend Developer and Code Reviewer name this file in their checklists (`.claude/agents/`). The Code Reviewer gate runs on every ticket and is where these rules are enforced.
 - Rule 1 can be linted, for example `grep -nE "border-(left|right|top|bottom)[^;]*[2-9]px" ts_checker_web/static/app.css`. Rule 2 cannot be detected reliably from CSS, so it is a review check.
 - The repository rules in `CLAUDE.md` still apply: native HTML, CSS and JavaScript, system fonts, no build step, no dependency, no external request, text set through `textContent` only.
+
+The colours come from the shared tokens; see [design-tokens.md](design-tokens.md).

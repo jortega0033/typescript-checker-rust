@@ -18,6 +18,7 @@ All entries are dated 2026-11-22.
 | 10 | Open decisions on tickets are settled with the ticket's stated default; where a ticket states none, the conservative option is taken and flagged in the issue. | 2026-11-22 | The list below; the issues themselves |
 | 11 | Rust is verified in CI only; nothing is installed on the owner's PC. | 2026-11-22 | `.github/workflows/ci.yml` (job `rust`), `CLAUDE.md` "If your machine has no Rust toolchain" |
 | 12 | The ten UI rules in `docs/ui-quality.md` are binding, and the `ui-ux-pro-max` and `unslop` skills are installed in the repository and used for UI work and for copy. | 2026-11-22 | `docs/ui-quality.md`, `.claude/skills/ui-ux-pro-max/`, `.claude/skills/unslop/`, `.claude/skills/implement-ticket/SKILL.md` |
+| 13 | Visual system: Pipenzo Flow look tokens (docs/design-tokens.md). SDLC kit version: jortega0033/sdlc-kit v1.0.0. | 2026-11-23 | `ts_checker_web/static/tokens.css`, `ts_checker_web/static/app.css`, `docs/design-tokens.md` |
 
 ## Open ticket decisions settled by default (entry 10)
 
