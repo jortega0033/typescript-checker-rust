@@ -2,7 +2,7 @@
 
 A dated record of the decisions the owner made for this repository, so the rules do not depend on anyone's memory of a conversation. Changing any entry needs the owner. An agent that finds a decision blocking a ticket stops and says so.
 
-All entries are dated 2026-11-22.
+Entries 1 to 12 are dated 2026-11-22; later entries carry their own date.
 
 | # | Decision | Date | Implemented in |
 |---|---|---|---|

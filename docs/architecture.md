@@ -101,7 +101,7 @@ An implementer must keep these unless a ticket says otherwise and the PRD is cha
 | `ts_checker_web/__main__.py` | Arguments, start-up line, exit codes 0, 1 (cannot bind) and 2 (bad argument). |
 | `ts_checker_web/server.py` | Routes, request validation, security headers, static files. |
 | `ts_checker_web/checker.py` | Finding and running the checker, mapping failures to HTTP errors. |
-| `ts_checker_web/static/` | `index.html`, `app.js`, `app.css`, `fixtures.json` (three examples for the page). |
+| `ts_checker_web/static/` | `index.html`, `app.js`, `app.css`, `fixtures.json` (three examples for the page), `tokens.css` (the shared Pipenzo tokens, an unchanged copy; see docs/design-tokens.md). |
 | `tests/test_checker.py` | 20 tests of the runner with the stand-in script. |
 | `tests/test_server.py` | 49 tests of the HTTP layer on an ephemeral port. |
 | `tests/test_support.py` | The stand-in checker script. No test cases. |
