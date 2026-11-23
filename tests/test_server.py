@@ -38,6 +38,7 @@ class ServerTestCase(unittest.TestCase):
         os.makedirs(self.static_dir)
         for name, text in {
             "index.html": "<!doctype html><title>t</title>",
+            "tokens.css": ":root{}",
             "app.css": "body{}",
             "app.js": "//js",
             "fixtures.json": '{"fixtures":[]}',
@@ -156,6 +157,7 @@ class StaticTests(ServerTestCase):
     def test_allowlisted_files(self):
         expected = {
             "/": ("text/html; charset=utf-8", b"<!doctype html><title>t</title>"),
+            "/static/tokens.css": ("text/css; charset=utf-8", b":root{}"),
             "/static/app.css": ("text/css; charset=utf-8", b"body{}"),
             "/static/app.js": ("text/javascript; charset=utf-8", b"//js"),
             "/static/fixtures.json": ("application/json; charset=utf-8", b'{"fixtures":[]}'),

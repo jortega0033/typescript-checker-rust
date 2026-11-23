@@ -21,6 +21,7 @@ DRAIN_LIMIT = 1024 * 1024
 # File names are constants; nothing from the request is ever joined to a path.
 STATIC_ROUTES = {
     "/": ("index.html", "text/html; charset=utf-8"),
+    "/static/tokens.css": ("tokens.css", "text/css; charset=utf-8"),
     "/static/app.css": ("app.css", "text/css; charset=utf-8"),
     "/static/app.js": ("app.js", "text/javascript; charset=utf-8"),
     "/static/fixtures.json": ("fixtures.json", "application/json; charset=utf-8"),
